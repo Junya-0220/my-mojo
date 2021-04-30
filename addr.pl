@@ -4,7 +4,7 @@ use warnings;
 no warnings 'once';
 use utf8;
 
-#OKのケースの配列
+#OKのケースの配列 テスト変更
 my @mocks = (
 	"testv.daybycube\@gmail.com",
 	"testv-daybycube\@gmail.com",
