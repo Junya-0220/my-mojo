@@ -4,7 +4,8 @@ use warnings;
 no warnings 'once';
 use utf8;
 
-#OKのケースの配列 テスト変更
+
+#OKのケースの配列
 my @mocks = (
 	"testv.daybycube\@gmail.com",
 	"testv-daybycube\@gmail.com",
@@ -46,7 +47,7 @@ my @mocks = (
 foreach  my $mock (@mocks) {
   my $ret = &check_addr($mock);
   if ($ret != 1) {
-    die sprintf("ng addr :%s\n", $mock);
+    printf("ng addr :%s\n", $mock);
   } else {
     printf("ok addr :%s\n", $mock);
   }
@@ -54,6 +55,8 @@ foreach  my $mock (@mocks) {
 
 #NGのケースの配列
 my @ng_mocks = (
+	"testv.ーaybycube\@gmail.com",
+	"testv.あaybycube\@gmail.com",
   "testv..daybycube\@gmail.com",
 	".testvdaybycube\@gmail.com",
 	"testvdaybycube.\@gmail.com",
@@ -104,11 +107,12 @@ my @ng_mocks = (
 	"\"\"",
 );
 
+
 #check_addrを実行して0を返せばOK
 foreach  my $mock (@ng_mocks) {
   my $ret = &check_addr($mock);
   if ($ret != 0) {
-    die sprintf("ng addr :%s\n", $mock);
+    printf("ng addr :%s\n", $mock);
   } else {
     printf("ok addr :%s\n", $mock);
   }
@@ -119,14 +123,9 @@ foreach  my $mock (@ng_mocks) {
 #https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9
 sub check_addr() {
   my ($address) = @_;
-	if(/^([a-zA-Z0-9\.\-\/_]{1,})@([a-zA-Z0-9\.\-\/_]{1,})\.([a-zA-Z0-9\.\-\/_]{1,})$/){
-		$address　がただしい。
-
-
+	if($address =~ /^([a-zA-Z0-9\.\-\/_]{1,})@([a-zA-Z0-9\.\-\/_]{1,})\.([a-zA-Z0-9\.\-\/_]{1,})$/){
   	return 1;
 	}else{
-
-
 		return 0;
 	}
 
