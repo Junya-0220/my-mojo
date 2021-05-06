@@ -1,0 +1,3 @@
+ok addr :testv-daybycube@gmail.com
+ok addr :testv/daybycube@gmail.com
+ok addr :testv_daybycube@gmail.com

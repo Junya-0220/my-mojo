@@ -3,6 +3,13 @@ use strict;
 use warnings;
 no warnings 'once';
 use utf8;
+use Encode;
+binmode STDIN, ':encoding(cp932)';
+binmode STDOUT, ':encoding(cp932)';
+binmode STDERR, ':encoding(cp932)';
+
+open(OK, "> ok.txt") or die("Error:$!");
+open(NG, "> ng.txt") or die("Error:$!");
 
 
 #OKのケースの配列
@@ -43,13 +50,12 @@ my @mocks = (
 	"\"testvd aybycube\"\@gmail.com",
 );
 
-#check_addrを実行して1を返せばOK
 foreach  my $mock (@mocks) {
   my $ret = &check_addr($mock);
   if ($ret != 1) {
-    printf("ng addr :%s\n", $mock);
+    printf(NG "ng addr :%s\n", $mock);
   } else {
-    printf("ok addr :%s\n", $mock);
+    printf(OK "ok addr :%s\n", $mock);
   }
 }
 
@@ -108,13 +114,13 @@ my @ng_mocks = (
 );
 
 
-#check_addrを実行して0を返せばOK
 foreach  my $mock (@ng_mocks) {
   my $ret = &check_addr($mock);
-  if ($ret != 0) {
-    printf("ng addr :%s\n", $mock);
+  if ($ret == 0) {
+    printf(NG "ng addr :%s\n", $mock);
   } else {
-    printf("ok addr :%s\n", $mock);
+		my $mock = decode( 'utf-8', $mock );
+    printf(OK "ok addr :%s\n", $mock);
   }
 }
 
@@ -123,12 +129,10 @@ foreach  my $mock (@ng_mocks) {
 #https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9
 sub check_addr() {
   my ($address) = @_;
-	if($address =~ /^([a-zA-Z0-9\.\-\/_]{1,})@([a-zA-Z0-9\.\-\/_]{1,})\.([a-zA-Z0-9\.\-\/_]{1,})$/){
+	if($address =~ /^([a-zA-Z0-9\-\/_]{1,})@([a-zA-Z0-9\.\-\/_]{1,})\.([a-zA-Z0-9\.\-\/_]{1,})$/){
   	return 1;
 	}else{
 		return 0;
 	}
-
 	#1回で終わらなかったら処理を以下に追加していく。
-
 }
