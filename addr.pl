@@ -127,10 +127,17 @@ foreach  my $mock (@ng_mocks) {
 # ここの関数を作成
 # 正規表現が問題なくメールアドレスをチェックできているかを確認する。
 #https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9
+# 引用した正規表現(一番最初)https://tech.katsubemakito.net/perl/expr_isemailaddress
+# 引用した正規表現(2回目)https://www.javadrive.jp/regex-basic/sample/index13.html
+# todo ""(ダブルクオーテーション)で囲った(45～50行目)メールアドレスはOKのリストに行くように修正を加える
+# todo ''(シングルクオーテーション)で囲った(38～43行目)メールアドレスはOKのリストに行くように修正を加える
+# todo 半角スペースが入っていたらNGに入れる
+# todo 途中に"が1つで入っていたらNGに入れる
 sub check_addr() {
   my ($address) = @_;
-	if($address =~ /^([a-zA-Z0-9\-\/_]{1,})@([a-zA-Z0-9\.\-\/_]{1,})\.([a-zA-Z0-9\.\-\/_]{1,})$/){
-  	return 1;
+	if($address =~ /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/){
+
+		return 1;
 	}else{
 		return 0;
 	}
