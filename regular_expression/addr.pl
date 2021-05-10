@@ -116,7 +116,7 @@ my @ng_mocks = (
 
 foreach  my $mock (@ng_mocks) {
   my $ret = &check_addr($mock);
-  if ($ret == 0) {
+  if ($ret != 1) {
     printf(NG "ng addr :%s\n", $mock);
   } else {
 		my $mock = decode( 'utf-8', $mock );

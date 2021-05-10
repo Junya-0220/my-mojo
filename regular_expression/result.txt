@@ -1,0 +1,19 @@
+/^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+
+NGケースだが、OKの判定をした
+78 ok addr :testvd aybycube@gmail.com
+82 ok addr :testv"daybycube@gmail.com
+
+
+OKケースだが、NGの判定をした
+"testv''daybycube@gmail.com",
+"testv''daybycube@gmailtest.com",
+"testv''daybycube@gmail.test.com",
+"testv''daybycube@gm.ail.te.st.com",
+"'testv''daybycube'@gmail.com",
+""testv<daybycube"@gmail.com",
+""testv>daybycube"@gmail.com",
+""testv..daybycube"@gmail.com",
+"".testvdaybycube"@gmail.com",
+""testvdaybycube."@gmail.com",
+""testvd aybycube"@gmail.com",
