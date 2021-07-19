@@ -1,0 +1,88 @@
+正規表現：/^[a-zA-Z0-9!$&*.=^`|~#%'+/?_{}-]+@([a-zA-Z0-9_-]+.)+[a-zA-Z]{2,4}$/
+################## OK ##########################
+	"testv.daybycube@gmail.com"ok
+	"testv-daybycube@gmail.com"ok
+	"testv%daybycube@gmail.com"ok
+	"testv'daybycube@gmail.com"ok
+	"testv#daybycube@gmail.com"ok
+	"testv&daybycube@gmail.com"
+	"testv!daybycube@gmail.com"ok
+	"testv(daybycube@gmail.com"
+	"testv)daybycube@gmail.com"
+	"testv~daybycube@gmail.com"ok
+	"testv|daybycube@gmail.com"ok
+	"testv[daybycube@gmail.com"
+	"testv]daybycube@gmail.com"
+	"testv{daybycube@gmail.com"ok
+	"testv}daybycube@gmail.com"ok
+	"testv;daybycube@gmail.com"
+	"testv:daybycube@gmail.com"
+	"testv/daybycube@gmail.com"ok
+	"testv=daybycube@gmail.com"ok
+	"testv?daybycube@gmail.com"ok
+	"testv_daybycube@gmail.com"ok
+	"testv'daybycube@gmail.com"ok
+	"testv''daybycube@gmail.com"ok
+	"testv''daybycube@gmailtest.com"ok
+	"testv''daybycube@gmail.test.com"ok
+	"testv''daybycube@gm.ail.te.st.com"ok
+	"'testv''daybycube'@gmail.com"ok
+  "testv.d.a.y.bycube@gmail.com"ok
+  ""testv<daybycube"@gmail.com"
+	""testv>daybycube"@gmail.com"
+	""testv..daybycube"@gmail.com"
+	"".testvdaybycube"@gmail.com"
+	""testvdaybycube."@gmail.com"
+	""testvd aybycube"@gmail.com"
+
+################## NG ##########################
+	"testv.ーaybycube@gmail.com"
+	"testv.あaybycube@gmail.com"
+  "testv..daybycube@gmail.com"ok
+	".testvdaybycube@gmail.com"ok
+	"testvdaybycube.@gmail.com"ok
+	"testv<daybycube@gmail.com"
+	"testv>daybycube@gmail.com"
+	"testv..daybycube@gmail.com"ok
+	"testv...daybycube@gmail.com"
+	"..testvdaybycube@gmail.com"
+	"................@gmail.com"
+	"testvdaybycube..@gmail.com"
+	".testvdaybycube@gmail.com"
+	"testvdaybycube.@gmail.com"
+	"testvd aybycube@gmail.com"
+  "test5vdaybycube"
+	"abcd",
+	"",
+	"testv"daybycube@gmail.com"
+	"testv""daybycube@gmail.com"
+	""testvd aybycube"@gma"il.com"
+	""testvd aybycube"@gma@il.com"
+	""testvd aybycube"@gma&il.com"
+	""testvd aybycube"@gma!il.com"
+	""testvd aybycube"@gma#il.com"
+	""testvd aybycube"@gma$il.com"
+	""testvd aybycube"@gma%il.com"
+	""testvd aybycube"@gma'il.com"
+	""testvd aybycube"@gma(il.com"
+	""testvd aybycube"@gma)il.com"
+	""testvd aybycube"@gma=il.com"
+	""testvd aybycube"@gma~il.com"
+	""testvd aybycube"@gma|il.com"
+	""testvd aybycube"@gma^il.com"
+	""testvd aybycube"@gma;il.com"
+	""testvd aybycube"@gma:il.com"
+	""testvd aybycube"@gma[il.com"
+	""testvd aybycube"@gma]il.com"
+	""testvd aybycube"@gma{il.com"
+	""testvd aybycube"@gma}il.com"
+	""testvd aybycube"@gma/il.com"
+	""testvd aybycube"@gmail.com"
+	""testvd aybycube"@gma,il.com"
+	""testvd aybycube"@gma<il.com"
+	""testvd aybycube"@gma>il.com"
+	""testvd aybycube"@gma?il.com"
+	""testvd aybycube"@gma_il.com"
+	""test5vdaybycube""
+	""abcd""
+	"""",
