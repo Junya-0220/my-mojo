@@ -15,6 +15,15 @@ use Encode;
 #OKのケースの配列
 my @mocks = (
 	"aiakos",
+	"カ ルビ",
+	"塩カ	ルビ",
+	"abc",
+	"ccc",
+	"015",
+	"051",
+	"061",
+	"071",
+	"0"
 	# "testv.daybycube\@gmail.com",
 	# "testv-daybycube\@gmail.com",
 	# "testv\%daybycube\@gmail.com",
@@ -139,7 +148,7 @@ foreach  my $mock (@mocks) {
 sub check_addr() {
   my ($address) = @_;
 	# if($address =~/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/){
-	if($address =~/^[a-z]+$/){
+	if($address =~/[0-9]+/){
 		return 1;
 	}else{
 		return 0;
