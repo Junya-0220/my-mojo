@@ -16,18 +16,11 @@ my $quoted_string = "\"$qcontent*\""; # " で 囲まれた quoted-string 形式�
 my $atext         = '[a-zA-Z0-9!#$%&\'*+\-\/\=?^_`{|}~]'; #通常、メールアドレスに使用出来る文字
 my $dot_atom_text = "$atext+(?:[.]$atext+)*"; #ドットが連続しない RFC 準拠形式をループ展開で構築
 my $dot_atom      = $dot_atom_text;
-# domainパートを作成する。　dot_atomで許容してる文字が多すぎて、通してはいけない文字もマッチしている事が問題。
 
-my $wsp2           = '[\x20\x09]'; # 半角空白と水平タブ
-my $vchar2         = '[\x21-\x7e]'; # ASCIIコードの ! から ~ まで
-my $quoted_pair2   = "\\\\(?:$vchar2|$wsp2)"; #\ を前につけた quoted-pair 形式なら \ と " が使用できる
-my $qtext2         = '[\x21\x23-\x5b\x5d-\x7e]'; #$vchar から \ と " を抜いたもの。\x22 は " , \x5c は\
-my $qcontent2      = "(?:$qtext2|$quoted_pair2)"; #quoted-string 形式の条件分岐
-my $quoted_string2 = "\"$qcontent2*\""; # " で 囲まれた quoted-string 形式。
+# domainパートを作成する。　dot_atomで許容してる文字が多すぎて、通してはいけない文字もマッチしている事が問題。
 my $atext2         = '[a-zA-Z0-9*+\-`]'; #通常、メールアドレスに使用出来る文字
 my $dot_atom_text2 = "$atext2+(?:[.]$atext2+)*"; #ドットが連続しない RFC 準拠形式をループ展開で構築
 my $dot_atom2      = $dot_atom_text2;
-
 my $domain        = $dot_atom2;
 
 # print("dot_atom: $dot_atom\n");
