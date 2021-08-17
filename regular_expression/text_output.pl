@@ -15,3 +15,18 @@ my $ng = "bad";
 print OK $ok . "\n";
 print OK "こんにちは";
 print NG $ng;
+
+# "testvd aybycube"@gmail.com
+# "testv<daybycube"@gmail.com
+# "testv>daybycube"@gmail.com
+# "testv..daybycube"@gmail.com
+# ".testvdaybycube"@gmail.com
+# "testvdaybycube."@gmail.com
+# "testv@daybycube"@gmail.com
+# "testv,daybycube"@gmail.com
+# "testv[daybycube"@gmail.com
+# "testv]daybycube"@gmail.com
+# "testv;daybycube"@gmail.com
+# "testv:daybycube"@gmail.com
+# "testv(daybycube"@gmail.com
+# "testv)daybycube"@gmail.com
