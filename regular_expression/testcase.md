@@ -85,3 +85,9 @@ testv""daybycube@gmail.com
 "test5vdaybycube"
 "abcd"
 ""
+
+
+//NGのはずだが、昔はアドレスが登録できた
+.testvdaybycube@gmail.com
+testv..daybycube@gmail.com
+testvdaybycube.@gmail.com

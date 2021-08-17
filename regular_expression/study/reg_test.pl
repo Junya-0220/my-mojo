@@ -7,33 +7,40 @@ use Encode;
 
 
 # local_partパートを作成する。
-my $wsp           = '[\x20\x09]'; # 半角空白と水平タブ
-my $vchar         = '[\x21-\x7e]'; # ASCIIコードの ! から ~ まで
-my $quoted_pair   = "\\\\(?:$vchar|$wsp)"; #\ を前につけた quoted-pair 形式なら \ と " が使用できる
-my $qtext         = '[\x20\x23-\x5b\x5d-\x7e]'; #$vchar から \ と " を抜いたもの。\x22 は " , \x5c は\
-my $qcontent      = "(?:$qtext|$quoted_pair)"; #quoted-string 形式の条件分岐
-my $quoted_string = "\"$qcontent*\""; # " で 囲まれた quoted-string 形式。
-my $atext         = '[a-zA-Z0-9!#$%&\'*+\-\/\=?^_`{|}~]'; #通常、メールアドレスに使用出来る文字
-my $dot_atom_text = "$atext+(?:[.]$atext+)*"; #ドットが連続しない RFC 準拠形式をループ展開で構築
-my $dot_atom      = $dot_atom_text;
+sub check_mailaddress {
+	my ($address) = @_;
+	my $wsp           = '[\x20\x09]'; # 半角空白と水平タブ
+	my $vchar         = '[\x21-\x7e]'; # ASCIIコードの ! から ~ まで
+	my $quoted_pair   = "\\\\(?:$vchar|$wsp)"; #\ を前につけた quoted-pair 形式なら \ と " が使用できる
+	my $qtext         = '[\x20\x23-\x5b\x5d-\x7e]'; #$vchar から \ と " を抜いたもの。\x22 は " , \x5c は\
+	my $qcontent      = "(?:$qtext|$quoted_pair)"; #quoted-string 形式の条件分岐
+	my $quoted_string = "\"$qcontent*\""; # " で 囲まれた quoted-string 形式。
+	my $atext         = '[a-zA-Z0-9!#$%&\'*+\-\/\=?^_`{|}~]'; #通常、メールアドレスに使用出来る文字
+	my $dot_atom_text = "$atext+(?:[.]$atext+)*"; #ドットが連続しない RFC 準拠形式をループ展開で構築
+	my $dot_atom      = $dot_atom_text;
 
-# domainパート
-my $atext2         = '[a-zA-Z0-9*+\-`]'; #通常、メールアドレスに使用出来る文字
-my $dot_atom_text2 = "$atext2+(?:[.]$atext2+)*"; #ドットが連続しない RFC 準拠形式をループ展開で構築
-my $dot_atom2      = $dot_atom_text2;
-my $domain        = $dot_atom2;
+	# domainパート
+	my $atext2         = '[a-zA-Z0-9*+\-`]'; #通常、メールアドレスに使用出来る文字
+	my $dot_atom_text2 = "$atext2+(?:[.]$atext2+)*"; #ドットが連続しない RFC 準拠形式をループ展開で構築
+	my $dot_atom2      = $dot_atom_text2;
+	my $domain        = $dot_atom2;
 
-my $local_part    = "(?:$dot_atom|$quoted_string)"; #local-part は dot-atom 形式 または quoted-string 形式のどちらかドメイン部分の判定強化
-my $addr_spec     = qr{${local_part}[@]$domain}; #合成
-
-
-#昔の携帯電話メールアドレス用
-my $dot_atom_loose   = "$atext+(?:[.]|$atext)*"; #連続したドットと @ の直前のドットを許容する
-my $local_part_loose = "(?:$dot_atom_loose|$quoted_string)"; #昔の携帯電話メールアドレスで quoted-string 形式なんてあるわけない。
-my $addr_spec_loose  = qr{${local_part_loose}[@]$domain}; #合成
+	my $local_part    = "(?:$dot_atom|$quoted_string)"; #local-part は dot-atom 形式 または quoted-string 形式のどちらかドメイン部分の判定強化
+	my $addr_spec     = qr{${local_part}[@]$domain}; #合成
 
 
-my $input_addr_spec = '';
+	#昔の携帯電話メールアドレス用
+	my $dot_atom_loose   = "$atext+(?:[.]|$atext)*"; #連続したドットと @ の直前のドットを許容する
+	my $local_part_loose = "(?:$dot_atom_loose|$quoted_string)"; #昔の携帯電話メールアドレスで quoted-string 形式なんてあるわけない。
+	my $addr_spec_loose  = qr{${local_part_loose}[@]$domain}; #合成
+
+	if ( $address =~ /\A$addr_spec\z/ ) {
+    return 1;
+	}else{
+		return 0;
+	}
+}
+
 
 my @mock = (
 	"testv.daybycube\@gmail.com",
@@ -166,9 +173,9 @@ my @mock = (
 );
 
 foreach my $check_addr(@mock){
-	$input_addr_spec = $check_addr;
+	my $input_addr_spec = $check_addr;
 
-if ( $input_addr_spec =~ /\A$addr_spec\z/ ) {
+if ( &check_mailaddress($input_addr_spec) ) {
     print "good $input_addr_spec\n";
 }else{
 	print "bad $input_addr_spec\n";
