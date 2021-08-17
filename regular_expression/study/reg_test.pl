@@ -35,7 +35,7 @@ sub check_mailaddress {
 	my $addr_spec_loose  = qr{${local_part_loose}[@]$domain}; #合成
 
 	if ( $address =~ /\A$addr_spec\z/ ) {
-    return 1;
+		return 1;
 	}else{
 		return 0;
 	}
@@ -64,9 +64,9 @@ my @mock = (
 	"testv''daybycube\@gmail.test.com",
 	"testv''daybycube\@gm.ail.te.st.com",
 	"'testv''daybycube'\@gmail.com",
-  "testv.d.a.y.bycube\@gmail.com",
+	"testv.d.a.y.bycube\@gmail.com",
 	"\"testvd aybycube\"\@gmail.com",
-  "\"testv<daybycube\"\@gmail.com",
+	"\"testv<daybycube\"\@gmail.com",
 	"\"testv>daybycube\"\@gmail.com",
 	"\"testv..daybycube\"\@gmail.com",
 	"\".testvdaybycube\"\@gmail.com",
@@ -90,7 +90,7 @@ my @mock = (
 	"testv)daybycube\@gmail.com",
 	"testv.ーaybycube\@gmail.com",
 	"testv.あaybycube\@gmail.com",
-  "testv..daybycube\@gmail.com",
+	"testv..daybycube\@gmail.com",
 	".testvdaybycube\@gmail.com",
 	"testvdaybycube.\@gmail.com",
 	"testv<daybycube\@gmail.com",
@@ -103,7 +103,7 @@ my @mock = (
 	".testvdaybycube\@gmail.com",
 	"testvdaybycube.\@gmail.com",
 	"testvd aybycube\@gmail.com",
-  "test5vdaybycube",
+	"test5vdaybycube",
 	"abcd",
 	"",
 	"testv\"daybycube\@gmail.com",
@@ -174,11 +174,9 @@ my @mock = (
 
 foreach my $check_addr(@mock){
 	my $input_addr_spec = $check_addr;
-
-if ( &check_mailaddress($input_addr_spec) ) {
-    print "good $input_addr_spec\n";
-}else{
-	print "bad $input_addr_spec\n";
-}
-
+	if ( &check_mailaddress($input_addr_spec) ) {
+		print "good $input_addr_spec\n";
+	}else{
+		print "bad $input_addr_spec\n";
+	}
 }
