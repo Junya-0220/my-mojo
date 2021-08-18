@@ -28,12 +28,10 @@ my $domain        = $dot_atom2;
 # print("quoted_string: $quoted_string\n");
 my $local_part    = "(?:$dot_atom|$quoted_string)"; #local-part は dot-atom 形式 または quoted-string 形式のどちらかドメイン部分の判定強化
 my $addr_spec     = qr{${local_part}[@]$domain}; #合成
+print("addr_spec: $addr_spec\n");
 print("local: $local_part\n");
-print("domain: $domain\n");
+# print("domain: $domain\n");
 
-
-
-my $input_addr_spec = '';
 
 my @mock = (
 
@@ -56,12 +54,12 @@ my @mock = (
 );
 
 foreach my $check_addr(@mock){
-	$input_addr_spec = $check_addr;
+	my $input_addr_spec = $check_addr;
 
 if ( $input_addr_spec =~ /\A$addr_spec\z/ ) {
-    print "good $input_addr_spec\n";
+    # print "good $input_addr_spec\n";
 }else{
-	print "bad $input_addr_spec\n";
+	# print "bad $input_addr_spec\n";
 }
 
 }
