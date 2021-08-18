@@ -167,7 +167,7 @@ my @mock = (
 foreach my $check_addr(@mock){
 	my $input_addr_spec = $check_addr;
 
-if ( &check_mailaddress($input_addr_spec) ) {
+if ( &register_check_mailaddress($input_addr_spec) ) {
     print "good $input_addr_spec\n";
 }else{
 	print "bad $input_addr_spec\n";
