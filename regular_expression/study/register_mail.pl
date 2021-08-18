@@ -6,7 +6,7 @@ use utf8;
 use Encode;
 
 
-sub register_mailaddress {
+sub register_check_mailaddress {
 	# local_partパートを作成する。
 	my ($address) = @_;
 	my $atext         = '[a-zA-Z0-9!#$%&\'*+\-\/\=?^_`{|}~]'; #通常、メールアドレスに使用出来る文字
